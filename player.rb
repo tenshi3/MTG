@@ -1,4 +1,4 @@
-require "deck"
+require_relative "deck"
 
 class Player
   attr_accessor :name

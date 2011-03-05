@@ -1,8 +1,14 @@
+puts Dir.pwd
+
 unless defined?(:debugger)
   def debugger; end
 end
 
-require 'game'
+unless defined?(:require_relative)
+  def require_relative(arg); require arg; end
+end
+
+require_relative 'game'
 
 game = Game.new
 

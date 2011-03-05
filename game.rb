@@ -1,4 +1,4 @@
-require "player"
+require_relative "player"
 
 class Game
   attr_accessor :players

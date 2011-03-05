@@ -1,4 +1,4 @@
-require "card"
+require_relative "card"
 
 class Deck
   class DrawFromEmptyLibrary < Exception; end
