@@ -1,3 +1,4 @@
+require_relative "_deck_header.rb"
 require "yaml"
 
 class Card
