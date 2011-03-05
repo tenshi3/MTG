@@ -1,0 +1,14 @@
+Trusty Machette:
+  types:
+    - Artefact
+  subtypes:
+    - Equipment
+  amount: 7
+  cost: 4
+
+Plains:
+  types:
+    - Land
+  colours:
+    - White
+  amount: 7

@@ -1,0 +1,80 @@
+Plains:
+  types:
+    - Land
+  colours:
+    - White
+  amount: 30
+
+Mistmeadow Skulk:
+  types:
+    - Creature
+  subtypes:
+    - Kithkin
+    - Rouge
+  amount: 4
+  cost: 2w
+  colours:
+    - White
+  keywords:
+    - Protection from CMC 3+
+    - Lifelink
+  power: 1
+  toughness: 2
+
+Kithkin Rabble:
+  types:
+    - Creature
+  subtypes:
+    - Kithkin
+  amount: 4
+  cost: 4w
+  colours:
+    - White
+  keywords:
+    - Vigilance
+  power: X
+  toughness: X
+
+Thistledown Duo:
+  types:
+    - Creature
+  subtypes:
+    - Kithkin
+  amount: 4
+  cost: 3(u/w)
+  colours:
+    - White
+    - Blue
+  power: 3
+  toughness: 3
+
+Steel of the Godhead:
+  types:
+    - Enchantment
+  subtypes:
+    - Aura
+  cost: 3w
+
+Springjack Shepard:
+  types:
+    - Creature
+  subtypes:
+    - Kithkin Wizard
+  cost: 3w
+  amount: 2
+  power: 1
+  toughness: 2
+  colours:
+    - White
+    - Blue
+
+Apothecary Initiate:
+  types:
+    - Creature
+  subtypes:
+    - Kithkin
+    - Cleric
+  cost: w
+  power: 1
+  toughness: 1
+  amount: 3
