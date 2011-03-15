@@ -1,36 +1,68 @@
-require_relative "player"
+require_relative "utils"
+require_relative "player/_player_header"
 
 class Game
+  include Utils
+
   attr_accessor :players
+  attr_accessor :round_number
 
   def initialize
     self.players = []
+    self.round_number = 1
   end
 
   def add_player(name, deck, ai)
-    self.players << Player.new(name, deck, ai)
+    self.players << if ai
+      AiPlayer.new(name, deck)
+    else
+      HumanPlayer.new(name, deck)
+    end
   end
 
   def start
-    puts "FINDING STARTING PLAYER"
+    display_status "FINDING STARTING PLAYER"
     player_to_start_index, player_to_start = find_starting_player!
 
     sort_players_into_turn_order!(player_to_start_index)
 
-    puts ""
-
     self.players.each do |player|
-      if player.ai
-        puts "#{player.name.upcase} DRAWS A STARTING HAND"
-      else
-        puts "YOU DRAW YOUR STARTING HAND"
-      end
-
       player.draw_starting_hand!
     end
+
+    display_status "STARTING GAME: ROUND 1"
+
+    # Take the first player's special turn
+    if player_to_start.play_first?
+      player.play!
+    else
+      player.draw!
+    end
+    self.players.shift
+
+    player_turns
+
+    self.players.unshift(player_to_start)
+
+    self.round_number = 2
+
+    begin
+      display_status "ROUND #{self.round_number}"
+      player_turns
+      self.round_number += 1
+    end while(self.players.count > 1)
   end
 
   private
+
+  def player_turns
+    self.players.each_with_index do |player, index|
+      player.take_turn!
+      if player.dead?
+        self.players.remove_at(index)
+      end
+    end
+  end
 
   def sort_players_into_turn_order!(start_index)
     while start_index != 0
