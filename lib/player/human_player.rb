@@ -4,7 +4,7 @@ class HumanPlayer < BasePlayer
   def is_ai?
     false
   end
-  
+
   def draw_starting_hand!
     super
 
@@ -12,14 +12,7 @@ class HumanPlayer < BasePlayer
       puts "You drew:"
       self.deck.show_hand
 
-      while true do
-        puts "", "Do you wish to mulligan? (y/N)"
-        answer = STDIN.gets.strip
-
-        if ["", "y", "n"].include?(answer.downcase)
-          break
-        end
-      end
+      answer = prompt_input("Do you wish to mulligan? (y/n)", ['y', 'n'])
 
       if answer == 'y'
         self.deck.mulligan!
@@ -31,5 +24,18 @@ class HumanPlayer < BasePlayer
         break
       end
     end
+  end
+
+  def play_first?
+    puts "Your hand:"
+    self.deck.show_hand
+
+    answer = prompt_input("Do you want to play first (p) or draw (d)?", ['p', 'd'])
+
+    return answer == 'p'
+  end
+
+  def play!
+    
   end
 end

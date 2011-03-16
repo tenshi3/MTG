@@ -34,9 +34,9 @@ class Game
 
     # Take the first player's special turn
     if player_to_start.play_first?
-      player.play!
+      player_to_start.play!
     else
-      player.draw!
+      player_to_start.draw!
     end
     self.players.shift
 

@@ -9,4 +9,12 @@ class AiPlayer < BasePlayer
     super
     self.deck.mulligan_if_needed
   end
+
+  def play_first?
+    true
+  end
+
+  def play!
+    
+  end
 end

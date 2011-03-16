@@ -31,4 +31,8 @@ class BasePlayer
     display_status "#{if is_ai?; name; else; "YOU"; end;} DRAWS STARTING HAND"
     self.deck.draw_hand!
   end
+
+  def play!
+    raise NotImplementedError
+  end
 end
