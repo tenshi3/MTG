@@ -4,6 +4,25 @@ Trusty Machette:
   subtypes:
     - Equipment
   cost: 4
+  colours:
+    - Colourless
+  activated:
+    1:
+      text: "Equip (2)."
+      conditions:
+        - "controller:mana(available:2)"
+      actions:
+        - "creature << battlefield:creatures:controller(choose)"
+        - "this:attach(<<creature>>)"
+  static:
+    1:
+      text: "Equipped creature gets +2/+1"
+      conditions:
+        - "this:attached"
+      actions:
+        - "creature << this:equipped"
+        - "<<creature>>:power(add:turn:2)"
+        - "<<creature>>:toughness(add:turn:1)"
   amount: 1
 
 Plains:
@@ -32,15 +51,17 @@ Quest for the Holy Relic:
   types:
     - Enchantment
   cost: w
+  colours:
+    - White
   amount: 1
-  triggers:
+  triggered:
     1:
       text: "Whenever you cast a creature spell, you may put a quest counter on Quest for the Holy Relic."
       conditions:
         - "controller:casts(spell:creature)"
       actions:
         - "this:counters(add:quest)"
-  abilities:
+  activated:
     1:
       text: "Remove five quest counters from Quest for the Holy Relic and sacrifice it: Search your library for an equipment card, put it onto the battlefield, and attach it to a creature you control. Then shuffle your library."
       conditions:
@@ -48,26 +69,28 @@ Quest for the Holy Relic:
       actions:
         - "this:counters(remove:quest:5)"
         - "this:sacrifice"
-        - "card << library:search(type:equipment:1)"
+        - "card << library:search(type:equipment)"
         - "battlefield(add:<<card>>)"
-        - "creature << battlefield:creatures:controller(choose:1)"
+        - "creature << battlefield:creatures:controller(choose)"
         - "<<card>>:attach(<<creature>>)"
 
 Sunspring Expedition:
   types:
     - Enchantment
   cost: w
+  colours:
+    - White
   amount: 2
   keywords:
     - Landfall
-  triggers:
+  triggered:
     1:
       text: "Whenever a land enters the battlefield under your control, you may put a quest counter on Sunspring Expedition."
       conditions:
         - "controller:casts(spell:land)"
       actions:
         - "this:counters(add:quest)"
-  abilities:
+  activated:
     1:
       text: "Remove three quest counters from Sunspring Expedition and sacrifice it: You gain 8 life."
       conditions:
@@ -86,13 +109,15 @@ Kor Hookmaster:
   cost: 2w
   colours:
     - White
-  triggers:
+  colours:
+    - White
+  triggered:
     1:
       text: "When Kor Hookmaster enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step."
       conditions:
         - "this:battlefield(enters)"
       actions:
-        - "creature << battlefield:creatures:controller(choose:untapped:1)"
+        - "creature << battlefield:creatures:controller(choose:untapped)"
         - "<<creature>>:tap"
         - "<<creature>>:uptap(delay:1)"
   power: 2
@@ -105,9 +130,11 @@ Adventuring Gear:
   subtypes:
     - Equipment
   cost: 1
+  colours:
+    - Colourless
   keywords:
     - Landfall
-  triggers:
+  triggered:
     1:
       text: "Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn."
       conditions:
@@ -116,12 +143,81 @@ Adventuring Gear:
         - "creature << this:equipped"
         - "<<creature>>:power(add:turn:2)"
         - "<<creature>>:toughness(add:turn:2)"
-  abilities:
+  activated:
     1:
       text: "Equip (1)."
       conditions:
         - "controller:mana(available:1)"
       actions:
-        - "creature << battlefield:creatures:controller(choose:1)"
+        - "creature << battlefield:creatures:controller(choose)"
         - "this:attach(<<creature>>)"
   amount: 2
+  
+Detainment Spell:
+  types:
+    - Enchantment
+  subtypes:
+    - Aura
+  cost: w
+  colours:
+    - White
+  static:
+    1:
+      text: "Enchanted creature's activated abilities can't be played."
+      actions:
+        - "creature << this:attached"
+        - "<<creature>>:abilities:activated(disable)"
+  activated:
+    1:
+      text: "(1w): Attach DetainmentSpell to target creature."
+      conditions:
+        - "controller:mana(available:1)"
+        - "controller:mana(available:w)"
+      actions:
+        - "this.dettatch"
+        - "creature << battlefield:creatures(choose)"
+        - "this:attach(<<creature>>)"
+  amount: 1
+
+Makindi Shieldmate:
+  types:
+    - Creature
+  subtypes:
+    - Kor
+    - Soldier
+    - Ally
+  cost: 2w
+  colours:
+    - White
+  keywords:
+    - Defender
+  triggered:
+    1:
+      text: "Whenever Makindi Shieldmate or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Makindi Shieldmate"
+      conditions:
+        - "creature << controller:casts(spell:creature)"
+        - "<<creature>>:subtype(has:Ally)"
+      actions:
+        - "this:counters(add:+1/+1)"
+  power: 0
+  toughness: 3
+  amount: 2
+
+Narrow Escape:
+  types:
+    - Instant
+  cost: 2w
+  colours:
+    - White
+  static:
+    1:
+      text: "Return target permanent you control to its owner's hand. You gain 4 life."
+      conditions:
+        - "battlefield:count(permenants:controller) > 0"
+      actions:
+        - "permanent << battlefield:permenants:controller(choose)"
+        - "<<permanent>>:move(hand:owner)"
+        - "controller << this:controller"
+        - "<<controller>>:life(add:8)"
+  amount: 1
+
