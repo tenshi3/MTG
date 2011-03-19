@@ -3,6 +3,10 @@ module Utils
     puts "","*","* #{message}","*"
   end
 
+  def announce(message)
+    puts "[#{message}]"
+  end
+
   def prompt_input(message, acceptable = nil)
     answer = nil
 

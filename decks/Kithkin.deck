@@ -11,7 +11,6 @@ Mistmeadow Skulk:
   subtypes:
     - Kithkin
     - Rouge
-  amount: 4
   cost: 2w
   colours:
     - White
@@ -20,6 +19,7 @@ Mistmeadow Skulk:
     - Lifelink
   power: 1
   toughness: 2
+  amount: 4
 
 Kithkin Rabble:
   types:

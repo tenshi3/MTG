@@ -23,6 +23,14 @@ class BasePlayer
     raise NotImplementedError
   end
 
+  def starting_turn
+    if self.play_first?
+      self.play!
+    else
+      self.draw!
+    end
+  end
+
   def play_first?
     raise NotImplementedError
   end
@@ -34,5 +42,13 @@ class BasePlayer
 
   def play!
     raise NotImplementedError
+  end
+  
+  def draw!
+    begin
+      self.deck.draw!(1, true)
+    rescue Deck::DrawFromEmptyLibrary => e
+      self.life = 0
+    end
   end
 end

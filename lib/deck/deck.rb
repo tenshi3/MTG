@@ -1,6 +1,9 @@
+require_relative "../utils.rb"
 require_relative "_deck_header.rb"
 
 class Deck
+  include Utils
+  
   class DrawFromEmptyLibrary < Exception; end
 
   attr_accessor :name
@@ -57,10 +60,12 @@ class Deck
     self.library.shuffle!
   end
 
-  def draw!(number)
+  def draw!(number, announce = false)
     number.times do
       raise DrawFromEmptyLibrary if empty_library?
-      self.hand.cards << self.library.shift
+      card = self.library.shift
+      self.hand.cards << card
+      announce("Drew #{card.name}") if announce
     end
   end
 

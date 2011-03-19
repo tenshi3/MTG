@@ -33,24 +33,17 @@ class Game
     display_status "STARTING GAME: ROUND 1"
 
     # Take the first player's special turn
-    if player_to_start.play_first?
-      player_to_start.play!
-    else
-      player_to_start.draw!
-    end
+    player_to_start.starting_turn
     self.players.shift
-
     player_turns
-
     self.players.unshift(player_to_start)
-
     self.round_number = 2
 
-    begin
+    while(self.players.count > 1)
       display_status "ROUND #{self.round_number}"
       player_turns
       self.round_number += 1
-    end while(self.players.count > 1)
+    end
   end
 
   private

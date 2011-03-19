@@ -19,8 +19,8 @@ class Card
     self.types.include?("Enchantment")
   end
 
-  def is_artefact?
-    self.types.include?("Artefact")
+  def is_artifact?
+    self.types.include?("Artifact")
   end
 
   def is_creature?
@@ -134,7 +134,7 @@ class Card
       card.cost = details["cost"].to_s
     end
 
-    if card.is_creature? || card.is_enchantment? || card.is_artefact? || card.is_instant?
+    if card.is_creature? || card.is_enchantment? || card.is_artifact? || card.is_instant?
       card.subtypes = details["subtypes"]
     end
 
