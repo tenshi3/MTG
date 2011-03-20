@@ -57,7 +57,7 @@ Quest for the Holy Relic:
   triggered:
     1:
       text: "Whenever you cast a creature spell, you may put a quest counter on Quest for the Holy Relic."
-      conditions:
+      trigger:
         - "controller:casts(spell:creature)"
       actions:
         - "this:counters(add:quest)"
@@ -86,7 +86,7 @@ Sunspring Expedition:
   triggered:
     1:
       text: "Whenever a land enters the battlefield under your control, you may put a quest counter on Sunspring Expedition."
-      conditions:
+      trigger:
         - "controller:casts(spell:land)"
       actions:
         - "this:counters(add:quest)"
@@ -114,7 +114,7 @@ Kor Hookmaster:
   triggered:
     1:
       text: "When Kor Hookmaster enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step."
-      conditions:
+      trigger:
         - "this:battlefield(enters)"
       actions:
         - "creature << battlefield:creatures:controller(choose:untapped)"
@@ -137,7 +137,7 @@ Adventuring Gear:
   triggered:
     1:
       text: "Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn."
-      conditions:
+      trigger:
         - "controller:casts(spell:land)"
       actions:
         - "creature << this:equipped"
@@ -194,7 +194,7 @@ Makindi Shieldmate:
   triggered:
     1:
       text: "Whenever Makindi Shieldmate or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Makindi Shieldmate"
-      conditions:
+      trigger:
         - "creature << controller:casts(spell:creature)"
         - "<<creature>>:subtype(has:Ally)"
       actions:

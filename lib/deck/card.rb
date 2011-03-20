@@ -148,7 +148,9 @@ class Card
       card.power = details["toughness"]
     end
 
-    debugger if details["static"]
+    if details["triggered"]
+      
+    end
 
     return card
   end

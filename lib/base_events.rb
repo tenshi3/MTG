@@ -5,7 +5,7 @@ module BaseEvents
       self.class_eval <<-RUBY, __FILE__, (__LINE__ + 1)
         def #{name}(#{filter_expand})
           event_hooks(name).each do |hook|
-            hook.fire(filter_expand)
+            hook.fire(#{filter.join(", ")})
           end
         end
       RUBY

@@ -6,4 +6,7 @@ class BaseAbility
   def self.build(ability)
     
   end
+  
+  def fire(*args)
+  end
 end
