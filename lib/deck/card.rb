@@ -1,4 +1,5 @@
-require_relative "_deck_header.rb"
+require_relative "_deck_header"
+require_relative "abilities/_ability_header"
 require "yaml"
 
 class Card
@@ -10,6 +11,10 @@ class Card
   attr_accessor :cost
   attr_accessor :colours
   attr_accessor :keywords
+  
+  attr_accessor :triggered
+  attr_accessor :static
+  attr_accessor :activated
 
   def is_land?
     self.types.include?("Land")
@@ -142,6 +147,8 @@ class Card
       card.power = details["power"]
       card.power = details["toughness"]
     end
+
+    debugger if details["static"]
 
     return card
   end

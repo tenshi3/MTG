@@ -6,6 +6,12 @@ unless Kernel.respond_to?(:require_relative)
   end
 end
 
+unless Kernel.respond_to?(:debugger)
+  module Kernel
+    def debugger;end
+  end
+end
+
 require_relative 'game'
 
 game = Game.new

@@ -1,5 +1,5 @@
-require_relative "../utils.rb"
-require_relative "_deck_header.rb"
+require_relative "../utils"
+require_relative "_deck_header"
 
 class Deck
   include Utils
